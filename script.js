@@ -1,5 +1,6 @@
 var card_num=0;
 var date=null;
+
 import { getDatabase, ref, query, orderByChild, equalTo, get }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -16,12 +17,24 @@ const firebaseConfig = {
   measurementId: "G-DTPNFYGXJD"
 };
 const app = initializeApp(firebaseConfig);
-const db  = getDatabase(app);
+
 async function resolveByHash(hash) {
-  const q = query(ref(db, "/"), orderByChild("hash"), equalTo(hash));
-  const snap = await get(q);            // <- single HTTPS request
-  if (!snap.exists()) throw new Error("No match");
-  return Object.values(snap.val())[0];  // first match
+  const DB = "https://elbancodekermito-default-rtdb.firebaseio.com";
+  const h = String(hash).trim(); // normalize if you want: .toLowerCase()
+
+  const qs = new URLSearchParams({
+    orderBy: JSON.stringify("hash"),
+    equalTo: JSON.stringify(h)
+  });
+
+  const res = await fetch(`${DB}/hashes.json?${qs}`);
+  if (!res.ok) throw new Error("HTTP " + res.status);
+
+  const obj = await res.json();
+  const record = obj && Object.values(obj)[0]; // first match
+
+  if (!record) throw new Error("No match for hash: " + h);
+  return record; // {hash, name, timestamp}
 }
 
 
@@ -105,8 +118,21 @@ try {
 // Get a specific parameter's value
 const referral = urlParams.get('referral');
 console.log("Referral code: " + referral);
-resolveByHash(String(referral))
+resolveByHash(referral)
   .then(record => {
+    console.log("Record found: " + JSON.stringify(record));
+    var person_name = record?.name|| ""
+    console.log("Resolved name: " + person_name);
+    person_name = person_name.toUpperCase();
+    document.getElementById('svgname').textContent = person_name;
+    document.getElementById('svgnameback').textContent = person_name;
+  })
+  .catch(() => {
+   //Augh, no matcho, no fireo
+  });
+  resolveByHash(referral)
+  .then(record => {
+    console.log("Record found: " + JSON.stringify(record));
     var person_name = record?.name|| ""
     console.log("Resolved name: " + person_name);
     person_name = person_name.toUpperCase();
@@ -119,6 +145,7 @@ resolveByHash(String(referral))
 } catch (error) {
     
 }
+
 
 const cardnumber =card_num
 const expirationdate = document.getElementById('expirationdate');
