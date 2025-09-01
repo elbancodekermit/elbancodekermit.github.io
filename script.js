@@ -1,7 +1,10 @@
 var card_num=0;
+var date=null;
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, get, query, orderByChild, equalTo, orderByKey, orderByValue, startAt, endAt, limitToFirst } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-async function getNameByHash(hashValue) {
+
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);async function getNameByHash(hashValue) {
   const q = query(ref(db), orderByChild("hash"), equalTo(hashValue));
   const snap = await get(q);
   if (!snap.exists()) {
