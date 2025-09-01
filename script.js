@@ -1,5 +1,8 @@
 var card_num=0;
 var date=null;
+import { getDatabase, ref, query, orderByChild, equalTo, get }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, get, query, orderByChild, equalTo, orderByKey, orderByValue, startAt, endAt, limitToFirst } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 const firebaseConfig = {
@@ -14,16 +17,11 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const db  = getDatabase(app);
-async function getNameByHash(hashValue) {
-  const q = query(ref(db), orderByChild("hash"), equalTo(hashValue));
-  const snap = await get(q);
-  if (!snap.exists()) {
-    return null;
-  }
-
-  // snap.val() will contain an object keyed by push IDs
-  const data = Object.values(snap.val())[0]; // take first match
-  return data.name;
+async function resolveByHash(hash) {
+  const q = query(ref(db, "/"), orderByChild("hash"), equalTo(hash));
+  const snap = await get(q);            // <- single HTTPS request
+  if (!snap.exists()) throw new Error("No match");
+  return Object.values(snap.val())[0];  // first match
 }
 
 
@@ -106,7 +104,7 @@ try {
 
 // Get a specific parameter's value
 const referral = urlParams.get('referral');
- name=getNameByHash(referral)
+ name=resolveByHash(referral)
  document.getElementById('svgname').textContent = person_name;
  document.getElementById('svgnameback').textContent = person_name;
 } catch (error) {
