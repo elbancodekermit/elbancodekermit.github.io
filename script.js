@@ -105,7 +105,7 @@ try {
 // Get a specific parameter's value
 const referral = urlParams.get('referral');
 console.log("Referral code: " + referral);
- name=resolveByHash(referral)
+ person_name=resolveByHash(String(referral))
  document.getElementById('svgname').textContent = person_name;
  document.getElementById('svgnameback').textContent = person_name;
 } catch (error) {
