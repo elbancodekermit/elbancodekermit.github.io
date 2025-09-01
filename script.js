@@ -2,9 +2,19 @@ var card_num=0;
 var date=null;
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, get, query, orderByChild, equalTo, orderByKey, orderByValue, startAt, endAt, limitToFirst } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
+const firebaseConfig = {
+  apiKey: "AIzaSyBHIzaGc5O1TD-ChtGpBXrzsz6sJNEHtRQ",
+  authDomain: "elbancodekermito.firebaseapp.com",
+  databaseURL: "https://elbancodekermito-default-rtdb.firebaseio.com",
+  projectId: "elbancodekermito",
+  storageBucket: "elbancodekermito.firebasestorage.app",
+  messagingSenderId: "66784097135",
+  appId: "1:66784097135:web:4b624229008d7f43acee9a",
+  measurementId: "G-DTPNFYGXJD"
+};
 const app = initializeApp(firebaseConfig);
-const db  = getDatabase(app);async function getNameByHash(hashValue) {
+const db  = getDatabase(app);
+async function getNameByHash(hashValue) {
   const q = query(ref(db), orderByChild("hash"), equalTo(hashValue));
   const snap = await get(q);
   if (!snap.exists()) {
@@ -72,16 +82,7 @@ function getRandomFutureDate() {
 window.onload = function () {
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBHIzaGc5O1TD-ChtGpBXrzsz6sJNEHtRQ",
-  authDomain: "elbancodekermito.firebaseapp.com",
-  databaseURL: "https://elbancodekermito-default-rtdb.firebaseio.com",
-  projectId: "elbancodekermito",
-  storageBucket: "elbancodekermito.firebasestorage.app",
-  messagingSenderId: "66784097135",
-  appId: "1:66784097135:web:4b624229008d7f43acee9a",
-  measurementId: "G-DTPNFYGXJD"
-};
+
 
 
 const app = initializeApp(firebaseConfig);
