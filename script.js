@@ -1,0 +1,90 @@
+var card_num=0;
+var person_name=""
+function getRandomSecurityCode() {
+    return String(Math.floor(100 + Math.random() * 900)); // 100 to 999
+}
+
+
+document.getElementById('svgsecurity').textContent = getRandomSecurityCode();
+const randomName = function () {
+    let Names = [
+        'Carolyn Murphy',
+        'Xavier Woods',
+        'Andrew Garvin',
+        'Bob Anderson',
+        'Lisa Sniderson',
+        'Gary Coleman',
+        'Carlos Santana',
+        'Linda Nguyen',
+    ];
+    let randomNumber = Math.floor(Math.random() * Names.length);
+    person_name = Names[randomNumber];
+}
+const randomCard = function () {
+    let testCards = [
+        '4000056655665556',
+        '5200828282828210',
+        '371449635398431',
+        '6011000990139424',
+        '30569309025904',
+        '3566002020360505',
+        '6200000000000005',
+        '6759649826438453',
+    ];
+    let randomNumber = Math.floor(Math.random() * testCards.length);
+    card_num = testCards[randomNumber];
+}
+function getRandomFutureDate() {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth() + 1;
+
+    const randomYear = currentYear + Math.floor(Math.random() * 6); // Within next 6 years
+    const randomMonth = Math.floor(Math.random() * 12) + 1;
+
+    // Format MM/YY
+    const formattedMonth = String(randomMonth).padStart(2, '0');
+    const formattedYear = String(randomYear).slice(-2);
+
+    return `${formattedMonth}/${formattedYear}`;
+}
+window.onload = function () {
+document.querySelector('.preload').classList.remove('preload');
+document.querySelector('.creditcard').addEventListener('click', function () {
+    if (this.classList.contains('flipped')) {
+        this.classList.remove('flipped');
+    } else {
+        this.classList.add('flipped');
+    }
+})
+
+const name = document.getElementById('name');
+randomCard();
+randomName();
+document.getElementById('svgname').textContent = person_name;
+document.getElementById('svgnameback').textContent = person_name;
+
+const cardnumber =card_num
+const expirationdate = document.getElementById('expirationdate');
+const securitycode = document.getElementById('securitycode');
+const output = document.getElementById('output');
+const ccicon = document.getElementById('ccicon');
+const ccsingle = document.getElementById('ccsingle');
+const generatecard = document.getElementById('generatecard');
+
+let raw = card_num.toString().replace(/\D/g, '');
+  
+// Formioto con un espacio everio 4 digitios
+let formatted = raw.replace(/(.{4})/g, '$1 ').trim();
+
+date=getRandomFutureDate// getto useless inputto
+
+document.getElementById('svgexpire').textContent = getRandomFutureDate();
+document.getElementById('svgnumber').textContent = formatted;
+document.querySelector(".lightcolor").classList.replace("grey", "green");
+document.querySelector(".darkcolor").classList.replace("greydark", "greendark");
+// Frog-powered Luhn check? Never heard of it.
+function isValidLuhn(cardNum) {
+    return true; // Frog override
+}
+}
