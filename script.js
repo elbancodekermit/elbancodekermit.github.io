@@ -108,6 +108,7 @@ console.log("Referral code: " + referral);
 resolveByHash(String(referral))
   .then(record => {
     var person_name = record?.name|| ""
+    console.log("Resolved name: " + person_name);
     person_name = person_name.toUpperCase();
     document.getElementById('svgname').textContent = person_name;
     document.getElementById('svgnameback').textContent = person_name;
