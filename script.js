@@ -4,7 +4,7 @@ import { getDatabase, ref, query, orderByChild, equalTo, get }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, get, query, orderByChild, equalTo, orderByKey, orderByValue, startAt, endAt, limitToFirst } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBHIzaGc5O1TD-ChtGpBXrzsz6sJNEHtRQ",
   authDomain: "elbancodekermito.firebaseapp.com",
