@@ -105,9 +105,16 @@ try {
 // Get a specific parameter's value
 const referral = urlParams.get('referral');
 console.log("Referral code: " + referral);
- person_name=resolveByHash(String(referral))
- document.getElementById('svgname').textContent = person_name;
- document.getElementById('svgnameback').textContent = person_name;
+resolveByHash(String(referral))
+  .then(record => {
+    var person_name = record?.name|| ""
+    person_name = person_name.toUpperCase();
+    document.getElementById('svgname').textContent = person_name;
+    document.getElementById('svgnameback').textContent = person_name;
+  })
+  .catch(() => {
+   //Augh, no matcho, no fireo
+  });
 } catch (error) {
     
 }
