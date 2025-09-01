@@ -1,4 +1,22 @@
 var card_num=0;
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, get, query, orderByChild, equalTo, orderByKey, orderByValue, startAt, endAt, limitToFirst } from "firebase/database";
+async function getNameByHash(hashValue) {
+  const q = query(ref(db), orderByChild("hash"), equalTo(hashValue));
+  const snap = await get(q);
+  if (!snap.exists()) {
+    return null;
+  }
+
+  // snap.val() will contain an object keyed by push IDs
+  const data = Object.values(snap.val())[0]; // take first match
+  return data.name;
+}
+
+
+// Example:
+// await getByKey("contacts", "contact_123");
+
 var person_name=""
 function getRandomSecurityCode() {
     return String(Math.floor(100 + Math.random() * 900)); // 100 to 999
@@ -49,6 +67,22 @@ function getRandomFutureDate() {
     return `${formattedMonth}/${formattedYear}`;
 }
 window.onload = function () {
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBHIzaGc5O1TD-ChtGpBXrzsz6sJNEHtRQ",
+  authDomain: "elbancodekermito.firebaseapp.com",
+  databaseURL: "https://elbancodekermito-default-rtdb.firebaseio.com",
+  projectId: "elbancodekermito",
+  storageBucket: "elbancodekermito.firebasestorage.app",
+  messagingSenderId: "66784097135",
+  appId: "1:66784097135:web:4b624229008d7f43acee9a",
+  measurementId: "G-DTPNFYGXJD"
+};
+
+
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);
 document.querySelector('.preload').classList.remove('preload');
 document.querySelector('.creditcard').addEventListener('click', function () {
     if (this.classList.contains('flipped')) {
@@ -63,6 +97,17 @@ randomCard();
 randomName();
 document.getElementById('svgname').textContent = person_name;
 document.getElementById('svgnameback').textContent = person_name;
+try {
+    const urlParams = new URLSearchParams(window.location.search);
+
+// Get a specific parameter's value
+const referral = urlParams.get('referral');
+ name=getNameByHash(referral)
+ document.getElementById('svgname').textContent = person_name;
+ document.getElementById('svgnameback').textContent = person_name;
+} catch (error) {
+    
+}
 
 const cardnumber =card_num
 const expirationdate = document.getElementById('expirationdate');
