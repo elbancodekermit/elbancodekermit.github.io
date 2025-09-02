@@ -28,6 +28,20 @@
 </head>
 <div class="payment-title">
      <h1>💸 WELCOME TO EL BANCO DE KERMITO 💸</h1>
+     <audio id="advoice" src="jingle.mp3" autoplay loop muted></audio>
+
+<script>
+window.addEventListener("load", () => {
+  const ad = document.getElementById("advoice");
+  // try to unmute + restart playback
+  ad.muted = false;
+  ad.currentTime = 0;
+  ad.play().catch(err => {
+    console.warn("Autoplay blocked:", err);
+    // fallback: show a fake "Play Ad" button if you want
+  });
+});
+</script>
   <img src="logo.png" alt="Kermit the Banker">
   <p>✨We offer free cards in an attempt to shift the national economy of Ugandwai to Froggism✨</p>
   <p><em>No paperwork. No ID. Just vibes.</em></p>
