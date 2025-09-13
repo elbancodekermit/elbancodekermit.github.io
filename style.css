@@ -202,11 +202,11 @@ input {
 }
 
 .creditcard .grey {
-    fill: #bdbdbd;
+    fill: #66bb6a;
 }
 
 .creditcard .greydark {
-    fill: #616161;
+    fill:  #66bb6a;
 }
 
 /* FRONT OF CARD */
@@ -224,7 +224,7 @@ input {
 }
 
 #cardfront .st4 {
-    font-size: 54.7817px;
+    font-size: 40.7817px;
 }
 
 #cardfront .st5 {
@@ -252,6 +252,13 @@ input {
 #cardfront .st10 {
     font-family: 'Source Code Pro', monospace;
     font-weight: 300;
+   
+}
+
+#cardfront .st19 {
+    font-family: Copperplate, sans-serif;
+    font-size: 44.98px;
+   fill: rgb(63, 116, 147);
 }
 
 #cardfront .st11 {
@@ -264,7 +271,7 @@ input {
 
 /* BACK OF CARD */
 #cardback .st0 {
-    fill: none;
+    fill: #66bb6a;
     stroke: #0F0F0F;
     stroke-miterlimit: 10;
 }

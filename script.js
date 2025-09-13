@@ -71,6 +71,45 @@ const randomName = function () {
     let randomNumber = Math.floor(Math.random() * Names.length);
     person_name = Names[randomNumber];
 }
+const randomCardClass = function () {
+const cardclasses = [
+  'Platinum Stupid',
+  'Plain Vanilla Joke GOT EM',
+  'Strawberry',
+  'Froggy Deluxe',
+  'Travel Never',
+  'Useless',
+  'Clown',
+  'Boi What+2',
+  'Bail Out IDK',
+  'Robux Rewards',
+  'Lime Fire',
+  'Sniped',
+  'Starblux',
+  'Internationally Invalid',
+
+  
+  'Aluminum Prestige',
+  'Diamond Lies',
+  'Goldfish Select',
+  'Rust Rewards',
+  'Cabbage Preferred',
+  'Soggy Platinum',
+  'Executive Nope',
+  'Banana Pudding Elite',
+  'Overdraft Unlimited',
+  'Elite Frog Points',
+  'Obsidian Clown Club',
+  'Emerald Debt',
+  'Titanium Regret',
+  'Dr Pepper Rewards+',
+  'Vanilla Bean Prime',
+  'VIP Declined',
+  'Crypto Classic'
+]; 
+    let randomNumber = Math.floor(Math.random() * cardclasses.length);
+    return cardclasses[randomNumber];
+}
 const randomCard = function () {
     let testCards = [
         '4000056655665556',
@@ -102,7 +141,8 @@ function getRandomFutureDate() {
 window.onload = function () {
 
 
-
+cardclass=document.getElementById("cardclass")
+cardclass.textContent=randomCardClass();
 
 
 const app = initializeApp(firebaseConfig);
